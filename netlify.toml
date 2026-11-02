@@ -1,0 +1,6 @@
+# Netlify serves the static frontend only. The Flask/TensorFlow API (app.py)
+# runs on Render (see render.yaml); its Python dependencies live in
+# requirements-server.txt so Netlify doesn't try to install them.
+[build]
+  publish = "."
+  command = "echo 'Static site - no build step'"
