@@ -9,7 +9,7 @@ The classifier is dataset-driven, so it supports vegetables, field crops, fruit 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-server.txt
 python app.py
 ```
 
