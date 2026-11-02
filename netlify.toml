@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+# The exported TensorFlow.js model only changes when it is retrained and re-exported.
+[[headers]]
+  for = "/models/tfjs/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"

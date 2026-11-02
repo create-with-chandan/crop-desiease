@@ -79,7 +79,7 @@
                 <div>
                     <h3>Pre-process</h3>
                     <p>
-                        The server validates and decodes the image, checks for
+                        The scanner validates and decodes the image in your browser, checks for
                         visible plant material, then resizes and normalizes it for the model.
                     </p>
                 </div>
@@ -157,8 +157,8 @@
                 <div class="info-card-icon">PY</div>
                 <h3>Python</h3>
                 <p>
-                    Python powers dataset preparation, model training and server-side
-                    image validation and inference.
+                    Python powers dataset preparation, model training and the optional Flask
+                    API; TensorFlow.js runs the exported model directly in the browser.
                 </p>
             </div>
 
@@ -245,7 +245,7 @@
 
             <p>
                 Upload a plant image to request an AI-assisted screening result.
-                Predictions require a trained model to be configured on the server.
+                Predictions run in your browser using the trained CropAI model.
             </p>
 
             <a href="scanner.html" class="btn">Launch AI Scanner →</a>
