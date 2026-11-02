@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: cropai
+    runtime: python
+    plan: standard
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --workers 1 --threads 2 --timeout 120 --bind 0.0.0.0:$PORT app:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9

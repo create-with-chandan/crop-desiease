@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropAI — How It Works</title>
+    <meta name="description" content="Learn how CropAI processes crop images and uses a trained computer vision model to identify supported plant disease patterns.">
+    <meta name="theme-color" content="#dfeef3">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="How CropAI Works">
+    <meta property="og:description" content="Explore CropAI's image-processing and crop disease classification pipeline.">
+    <meta name="twitter:card" content="summary">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="loader" aria-hidden="true">
+    <div class="loader-inner">
+        <div class="loader-logo">CROP<span>AI</span></div>
+        <div class="loader-line"></div>
+        <div class="loader-text">INITIALIZING VISION SYSTEM</div>
+    </div>
+</div>
+
+<div class="cursor-glow" aria-hidden="true"></div>
+
+<header class="navbar">
+    <a href="index.html" class="logo">
+        <div class="logo-mark">⌁</div>
+        CROP<span>AI</span>
+    </a>
+
+    <nav id="main-navigation" class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="scanner.html">Scanner</a>
+        <a href="how-it-works.html" class="active" aria-current="page">Technology</a>
+        <a href="diseases.html">Diseases</a>
+        <a href="about.html">About</a>
+        <a href="scanner.html" class="nav-cta">Launch Scanner →</a>
+    </nav>
+
+    <button class="menu-btn" type="button" aria-label="Toggle navigation" aria-controls="main-navigation" aria-expanded="false">☰</button>
+</header>
+
+<main>
+
+<section class="page-hero">
+    <div class="container">
+        <div class="eyebrow">HOW THE SYSTEM WORKS</div>
+        <h1 class="section-title">From image to <span>AI insight.</span></h1>
+        <p class="section-description">
+            CropAI sends an uploaded plant image to its Flask API, where image
+            processing and a configured TensorFlow model power a four-stage analysis pipeline.
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <div class="steps">
+
+            <div class="step reveal">
+                <div class="step-number">01</div>
+                <div>
+                    <h3>Capture</h3>
+                    <p>
+                        Choose a JPG or PNG image in the scanner. CropAI sends it to
+                        the Flask API for analysis; uploads are limited to 8 MB.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">02</div>
+                <div>
+                    <h3>Pre-process</h3>
+                    <p>
+                        The server validates and decodes the image, checks for
+                        visible plant material, then resizes and normalizes it for the model.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">03</div>
+                <div>
+                    <h3>Detect</h3>
+                    <p>
+                        A configured TensorFlow model scores the image against its
+                        trained classes. Low-confidence results are rejected.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step reveal">
+                <div class="step-number">04</div>
+                <div>
+                    <h3>Explain</h3>
+                    <p>
+                        The scanner displays the predicted class, confidence and
+                        available guidance. Treat predictions as screening, not a diagnosis.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <div class="section-head">
+            <div class="section-label">TECH STACK</div>
+            <h2 class="section-title">The intelligence <span>behind CropAI.</span></h2>
+            <p class="section-description">
+                The scanner frontend uploads images to the Flask API. The API
+                preprocesses them and runs inference when trained model artifacts are configured.
+            </p>
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info-card reveal">
+                <div class="info-card-icon">AI</div>
+                <h3>Machine Learning</h3>
+                <p>
+                    The classifier learns disease-related visual patterns from
+                    labeled images and rejects predictions below its confidence threshold.
+                </p>
+            </div>
+
+            <div class="info-card reveal">
+                <div class="info-card-icon">CV</div>
+                <h3>Computer Vision</h3>
+                <p>
+                    OpenCV decodes and resizes uploads, normalizes image input, and
+                    screens for obvious non-plant images before inference.
+                </p>
+            </div>
+
+            <div class="info-card reveal">
+                <div class="info-card-icon">TF</div>
+                <h3>TensorFlow</h3>
+                <p>
+                    TensorFlow and Keras train and load the neural-network image
+                    classifier used by the prediction API.
+                </p>
+            </div>
+
+            <div class="info-card reveal">
+                <div class="info-card-icon">PY</div>
+                <h3>Python</h3>
+                <p>
+                    Python powers dataset preparation, model training and server-side
+                    image validation and inference.
+                </p>
+            </div>
+
+            <div class="info-card reveal">
+                <div class="info-card-icon">FL</div>
+                <h3>Flask</h3>
+                <p>
+                    Flask serves the frontend and provides `/api/health` and
+                    `/api/predict` endpoints for model status and image analysis.
+                </p>
+            </div>
+
+            <div class="info-card reveal">
+                <div class="info-card-icon">JS</div>
+                <h3>Frontend</h3>
+                <p>
+                    HTML, CSS and JavaScript provide image upload, preview, API
+                    requests, and readable prediction results.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <div class="glass-panel about-panel">
+
+            <div class="section-label">THE PIPELINE</div>
+
+            <h2>
+                Image
+                <span>→</span>
+                Processing
+                <span>→</span>
+                Model
+                <span>→</span>
+                Prediction
+            </h2>
+
+            <p>
+                The scanner sends an image to the Flask API, which validates and
+                preprocesses it before running model inference. A fresh checkout
+                needs trained model and label files before predictions are available.
+            </p>
+
+            <div class="feature-list">
+
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    Image upload
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    Image preprocessing
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    Neural network inference
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    Confidence score
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-box">
+
+            <h2>See the system in action.</h2>
+
+            <p>
+                Upload a plant image to request an AI-assisted screening result.
+                Predictions require a trained model to be configured on the server.
+            </p>
+
+            <a href="scanner.html" class="btn">Launch AI Scanner →</a>
+
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-mark">⌁</div>
+                    CROP<span>AI</span>
+                </a>
+                <p>
+                    Intelligent crop disease detection powered by computer vision.
+                </p>
+            </div>
+
+            <div>
+                <h4>PRODUCT</h4>
+                <a href="scanner.html">Scanner</a>
+                <a href="diseases.html">Diseases</a>
+            </div>
+
+            <div>
+                <h4>LEARN</h4>
+                <a href="how-it-works.html">Technology</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <div>
+                <h4>START</h4>
+                <a href="scanner.html">Scan Crop</a>
+                <a href="index.html">Home</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© <span class="year">2026</span> CropAI</span>
+            <span>Computer Vision System</span>
+        </div>
+
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

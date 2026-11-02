@@ -1,0 +1,44 @@
+{
+  "default": {
+    "cause": "The trained class may be associated with a fungal, bacterial, viral, pest, or environmental problem. Confirm the cause locally.",
+    "symptoms": "Compare spots, discoloration, wilting, mildew, lesions, and leaf distortion with a trusted crop-disease reference.",
+    "action": "Separate affected plants, avoid spreading plant material, improve airflow, and consult an agronomist before treatment.",
+    "food_safety": "Do not eat visibly diseased plant parts. CropAI cannot determine whether produce is safe to eat; follow local food-safety guidance."
+  },
+  "healthy": {
+    "cause": "No disease pattern was found among the classes supported by this model.",
+    "symptoms": "No supported disease signal was detected in the uploaded image.",
+    "action": "Continue normal crop monitoring and rescan if visible changes develop.",
+    "food_safety": "A healthy model result is not a food-safety certification. Wash produce and follow normal food-handling guidance."
+  },
+  "early blight": {
+    "cause": "Commonly associated with the fungus Alternaria solani and conditions that leave foliage wet for long periods.",
+    "symptoms": "Dark lesions, often with concentric rings, yellowing, and premature leaf loss.",
+    "action": "Remove severely affected foliage, reduce leaf wetness, improve airflow, and confirm treatment locally.",
+    "food_safety": "Do not eat affected leaves. Inspect harvested produce and follow local food-safety advice before consumption."
+  },
+  "late blight": {
+    "cause": "Associated with the oomycete Phytophthora infestans and cool, wet conditions.",
+    "symptoms": "Rapidly expanding dark lesions, water-soaked areas, and possible white growth under humid conditions.",
+    "action": "Isolate affected plants promptly, avoid handling wet foliage, and contact an agricultural specialist.",
+    "food_safety": "Do not eat visibly affected produce. Discard questionable material according to local guidance."
+  },
+  "powdery mildew": {
+    "cause": "A group of fungal pathogens favored by humid air and limited airflow.",
+    "symptoms": "White powder-like growth on leaf surfaces, curling, yellowing, or reduced vigor.",
+    "action": "Improve spacing and airflow, remove heavily affected leaves, and confirm an approved treatment.",
+    "food_safety": "Do not eat visibly diseased leaves. Wash edible produce and follow local food-safety guidance."
+  },
+  "bacterial spot": {
+    "cause": "Bacterial pathogens can spread through splashing water, handling, and contaminated plant material.",
+    "symptoms": "Small dark or water-soaked spots that may merge and cause yellowing or fruit blemishes.",
+    "action": "Remove affected material, avoid overhead watering, sanitize tools, and seek local guidance.",
+    "food_safety": "Do not eat damaged or questionable parts. Food safety depends on the crop, severity, and local guidance."
+  },
+  "mosaic virus": {
+    "cause": "Plant viruses are often spread by infected material or insect vectors.",
+    "symptoms": "Mottled light and dark patterns, leaf distortion, stunting, and uneven growth.",
+    "action": "Remove infected plants where advised, control vectors, and avoid saving propagation material.",
+    "food_safety": "Do not eat visibly damaged plant parts. Ask local agricultural and food-safety authorities about the crop."
+  }
+}

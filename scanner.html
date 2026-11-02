@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropAI — AI Scanner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="scanner-view">
+
+<div class="loader">
+    <div class="loader-inner">
+        <div class="loader-logo">CROP<span>AI</span></div>
+        <div class="loader-line"></div>
+        <div class="loader-text">INITIALIZING VISION SYSTEM</div>
+    </div>
+</div>
+
+<div class="cursor-glow"></div>
+
+<header class="navbar">
+    <a href="index.html" class="logo">
+        <div class="logo-mark">⌁</div>
+        CROP<span>AI</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="scanner.html" class="active">Scanner</a>
+        <a href="how-it-works.html">Technology</a>
+        <a href="diseases.html">Diseases</a>
+        <a href="about.html">About</a>
+        <a href="scanner.html" class="nav-cta">Launch Scanner →</a>
+    </nav>
+
+    <button class="menu-btn" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+</header>
+
+<main>
+
+<section class="page-hero">
+    <div class="container">
+        <div class="eyebrow">AI VISION SCANNER</div>
+        <h1 class="section-title">Turn a leaf into <span>intelligence.</span></h1>
+        <p class="section-description">
+            Upload a crop image and let the CropAI vision engine inspect visual patterns,
+            identify possible disease signals and generate an AI-assisted diagnosis.
+        </p>
+    </div>
+</section>
+
+<section class="page-shell">
+    <div class="container">
+
+        <div class="scanner-page">
+
+            <div class="glass-panel upload-panel">
+                <div class="section-label">01 / CAPTURE</div>
+
+                <div class="upload-zone" id="uploadZone">
+
+                    <div class="upload-icon" aria-hidden="true">⌁</div>
+
+                    <h3>Drop your crop image here</h3>
+
+                    <p>
+                        Upload a clear JPG, JPEG or PNG image of a crop leaf.
+                        Better lighting and visibility can improve analysis quality.
+                    </p>
+
+                    <label for="imageInput" class="btn btn-primary" role="button" tabindex="0">
+                        Choose Image
+                    </label>
+
+                    <input
+                        type="file"
+                        id="imageInput"
+                        class="upload-input"
+                        accept="image/png,image/jpeg,image/jpg"
+                    >
+
+                    <div id="previewContainer"></div>
+
+                </div>
+
+                <div class="hero-actions">
+                    <button class="btn btn-primary" id="scanBtn" type="button" disabled>
+                        Analyze With AI →
+                    </button>
+
+                    <button class="btn btn-secondary" id="removeBtn" type="button">
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <div class="glass-panel scan-result">
+
+                <div class="section-label">02 / INTELLIGENCE</div>
+
+                <div class="result-placeholder" id="resultPlaceholder">
+
+                    <div class="result-orbit">
+                        <span>✦</span>
+                    </div>
+
+                    <h3>Waiting for an image</h3>
+
+                    <p>
+                        Your prediction report will appear here after the AI vision
+                        engine completes its analysis.
+                    </p>
+
+                </div>
+
+                <div class="result-status" id="resultStatus" role="alert" aria-live="polite" hidden></div>
+
+                <div class="result-card" id="resultCard">
+
+                    <div class="result-title">
+                        <h3 id="diseaseName">Leaf Disease</h3>
+                        <span class="result-badge">AI DETECTED</span>
+                    </div>
+
+                    <div class="confidence">
+
+                        <div class="confidence-head">
+                            <span>Prediction Confidence</span>
+                            <strong id="confidenceValue">0%</strong>
+                        </div>
+
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceFill"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="result-details">
+
+                        <div class="detail-box">
+                            <small>Plant</small>
+                            <strong id="plantType">Tomato</strong>
+                        </div>
+
+                        <div class="detail-box">
+                            <small>Status</small>
+                            <strong id="resultCondition">Potential Risk</strong>
+                        </div>
+
+                        <div class="detail-box">
+                            <small>Model</small>
+                            <strong>CropAI Vision</strong>
+                        </div>
+
+                        <div class="detail-box">
+                            <small>Analysis</small>
+                            <strong>Image Pattern</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="info-card" style="margin-top:20px">
+                        <div class="info-card-icon">✦</div>
+                        <h3>AI Insight</h3>
+                        <p id="resultDescription">
+                            Analysis information will appear here.
+                        </p>
+                    </div>
+
+                    <div class="result-guidance">
+                        <div class="guidance-item">
+                            <small>Likely cause</small>
+                            <p id="resultCause">Cause information will appear here.</p>
+                        </div>
+                        <div class="guidance-item">
+                            <small>Visible symptoms</small>
+                            <p id="resultSymptoms">Symptom information will appear here.</p>
+                        </div>
+                        <div class="guidance-item">
+                            <small>Recommended action</small>
+                            <p id="resultAction">Action guidance will appear here.</p>
+                        </div>
+                        <div class="guidance-item food-safety">
+                            <small>Food safety</small>
+                            <p id="resultFoodSafety">Food-safety guidance will appear here.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <div class="section-head">
+            <div class="section-label">SCANNING GUIDE</div>
+            <h2 class="section-title">Better input. <span>Better insight.</span></h2>
+            <p class="section-description">
+                A few simple steps can help the vision system interpret the crop more clearly.
+            </p>
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info-card reveal">
+                <div class="info-card-icon">01</div>
+                <h3>Use natural light</h3>
+                <p>
+                    Capture the leaf in clear lighting so visible spots, patterns and texture
+                    remain easy to analyze.
+                </p>
+            </div>
+
+            <div class="info-card reveal">
+                <div class="info-card-icon">02</div>
+                <h3>Keep the leaf visible</h3>
+                <p>
+                    Avoid unnecessary background objects. A centered leaf can provide a cleaner
+                    visual signal.
+                </p>
+            </div>
+
+            <div class="info-card reveal">
+                <div class="info-card-icon">03</div>
+                <h3>Review the result</h3>
+                <p>
+                    Use confidence and disease information as an initial AI-assisted signal,
+                    not as a replacement for expert diagnosis.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-box">
+
+            <h2>Ready to scan your next leaf?</h2>
+
+            <p>
+                CropAI transforms a simple crop image into an intelligent visual analysis
+                experience designed for faster agricultural decision-making.
+            </p>
+
+            <a href="scanner.html" class="btn">Scan Another Image →</a>
+
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-mark">⌁</div>
+                    CROP<span>AI</span>
+                </a>
+                <p>
+                    AI-powered crop disease detection built around computer vision,
+                    intelligent analysis and accessible agricultural technology.
+                </p>
+            </div>
+
+            <div>
+                <h4>PRODUCT</h4>
+                <a href="scanner.html">AI Scanner</a>
+                <a href="diseases.html">Disease Library</a>
+            </div>
+
+            <div>
+                <h4>EXPLORE</h4>
+                <a href="how-it-works.html">Technology</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <div>
+                <h4>SYSTEM</h4>
+                <a href="scanner.html">Launch Scanner</a>
+                <a href="index.html">Home</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 CropAI</span>
+            <span>AI • Agriculture • Vision</span>
+        </div>
+
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
