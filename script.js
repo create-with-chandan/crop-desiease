@@ -53,30 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const homeClassMessage = document.querySelector('#homeClassMessage');
     if (homeModelStatus && homeModelMessage && homeClassCount && homeClassMessage) {
         const updateHomeModelStatus = async () => {
-            if (window.location.protocol === 'file:') {
-                homeModelStatus.textContent = 'OFFLINE';
-                homeModelMessage.textContent = 'START LOCAL SERVER';
-                homeClassMessage.textContent = 'MODEL REQUIRED';
-                return;
-            }
-
             try {
-                const response = await fetch('/api/health');
-                if (response.status === 404) {
-                    homeModelStatus.textContent = 'WRONG SERVER';
-                    homeModelMessage.textContent = 'OPEN LOCAL APP';
-                    homeClassMessage.textContent = 'HTTP 404';
-                    return;
-                }
-                if (!response.ok) throw new Error(`Server returned ${response.status}.`);
-                const health = await response.json();
-                homeModelStatus.textContent = health.model_loaded ? 'READY' : 'SETUP';
-                homeModelMessage.textContent = health.model_loaded ? 'MODEL ACTIVE' : 'MODEL REQUIRED';
-                homeClassCount.textContent = String(health.labels_loaded || 0);
-                homeClassMessage.textContent = health.model_loaded ? 'LOADED CLASSES' : 'NOT CONFIGURED';
+                const count = await window.CropAI.labelCount();
+                homeModelStatus.textContent = 'READY';
+                homeModelMessage.textContent = 'RUNS IN BROWSER';
+                homeClassCount.textContent = String(count);
+                homeClassMessage.textContent = 'LOADED CLASSES';
             } catch {
                 homeModelStatus.textContent = 'OFFLINE';
-                homeModelMessage.textContent = 'SERVER UNAVAILABLE';
+                homeModelMessage.textContent = 'MODEL UNAVAILABLE';
                 homeClassMessage.textContent = 'MODEL REQUIRED';
             }
         };
@@ -236,26 +221,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkService = async () => {
         if (!resultStatus) return;
         if (window.location.protocol === 'file:') {
-            showResultError('The scanner needs the CropAI server. Start it with .venv\\Scripts\\python.exe app.py, then open http://127.0.0.1:5000/scanner.html.');
+            showResultError('Open the scanner from the website instead of opening scanner.html directly from your computer.');
             return;
         }
 
         try {
-            const response = await fetch('/api/health');
-            if (response.status === 404) {
-                throw new Error('This page is being served by a different web server. Open the CropAI scanner at http://127.0.0.1:5000/scanner.html.');
-            }
-            if (!response.ok) throw new Error(`CropAI health check failed (HTTP ${response.status}).`);
-            const health = await response.json();
-            if (!health.model_loaded) {
-                showResultError('The scanner server is running, but its trained AI model is not installed. Follow the model-training steps in README.md before analysis.');
-            }
+            await window.CropAI.loadModel();
         } catch (error) {
-            if (error instanceof TypeError) {
-                showResultError('Cannot connect to the CropAI server. Start it with .venv\\Scripts\\python.exe app.py, then open http://127.0.0.1:5000/scanner.html.');
-            } else {
-                showResultError(error.message);
-            }
+            showResultError(`The CropAI model could not be loaded. ${error.message}`);
         }
     };
 
@@ -273,17 +246,8 @@ document.addEventListener('DOMContentLoaded', () => {
         resultCard?.classList.remove('show');
 
         try {
-            const formData = new FormData();
-            formData.append('image', selectedFile);
-            const response = await fetch('/api/predict', {
-                method: 'POST',
-                body: formData,
-                signal: controller.signal
-            });
-            const payload = await response.json().catch(() => null);
-            if (!response.ok) {
-                throw new Error(payload?.error || `The AI service could not analyze this image (HTTP ${response.status}).`);
-            }
+            const payload = await window.CropAI.predict(selectedFile);
+            if (controller.signal.aborted) return;
             if (!payload || typeof payload.disease !== 'string' ||
                 typeof payload.plant !== 'string' ||
                 typeof payload.confidence !== 'number' ||
@@ -307,9 +271,9 @@ document.addEventListener('DOMContentLoaded', () => {
             showToast('Analysis complete. Review the model result.');
         } catch (error) {
             if (!controller.signal.aborted && error.name !== 'AbortError') {
-                const message = error instanceof TypeError
-                    ? 'Could not connect to the CropAI server. Run .venv\\Scripts\\python.exe app.py and open the scanner at http://127.0.0.1:5000/scanner.html.'
-                    : error.message;
+                const message = error instanceof window.CropAI.PredictionError
+                    ? error.message
+                    : `The AI model could not analyze this image: ${error.message}`;
                 showResultError(message);
                 showToast(message);
             }

@@ -15,12 +15,11 @@ python app.py
 
 Open `http://127.0.0.1:5000/`.
 
-Do not open `index.html` or `scanner.html` by double-clicking them. The scanner
-needs the Flask server on the same origin to reach `/api/health` and
-`/api/predict`; opening a `file://` page cannot make those requests.
-If another web server or a static-hosted page reports HTTP 404 for `/api/health`,
-open the scanner from the CropAI server at
-`http://127.0.0.1:5000/scanner.html` instead of reloading that page.
+The scanner runs the trained model directly in the browser with TensorFlow.js,
+so the hosted site (for example on Netlify) works without a Python server.
+The Flask server is optional and only needed for the `/api/predict` endpoint.
+Do not open `scanner.html` by double-clicking it; serve the folder over HTTP
+(for example with `python app.py` or `netlify dev`) so the model files can load.
 
 The trained model and its matching labels are included in Git so a deployment
 can start ready to serve predictions. Keep the training dataset out of Git.
@@ -38,6 +37,12 @@ Then train the model:
 
 ```powershell
 python train.py --data training-data --output models --epochs 12
+```
+
+Then export the browser model used by the scanner (needs only `h5py` and `numpy`):
+
+```powershell
+python export_tfjs.py --model models\crop_disease.keras --output models\tfjs
 ```
 
 After training, restart the server and check `http://127.0.0.1:5000/api/health`
